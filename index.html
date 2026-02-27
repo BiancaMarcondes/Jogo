@@ -39,6 +39,12 @@
         <!-- Seleção de Personagem e Arma -->
         <main id="selection-screen" class="screen">
             <h2 id="selection-title">ESCOLHA SEU HERÓI</h2>
+
+            <div id="gender-toggle" class="gender-toggle">
+                <button id="gender-m" class="gender-btn active" onclick="setGender('M')">MASCULINO</button>
+                <button id="gender-f" class="gender-btn" onclick="setGender('F')">FEMININO</button>
+            </div>
+
             <div class="character-list">
                 <!-- Cards inseridos via JS -->
             </div>
