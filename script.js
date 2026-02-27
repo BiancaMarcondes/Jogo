@@ -1,4 +1,5 @@
 const characters = [
+    // Classe Samurai
     {
         name: "Lâmina Neon",
         hp: 100, atk: [15, 20], def: [5, 8], icon: "⚔️",
@@ -7,25 +8,75 @@ const characters = [
         imgF: "assets/lamina_neon_f.png"
     },
     {
+        name: "Katana de Cyber",
+        hp: 100, atk: [16, 21], def: [4, 7], icon: "🗡️",
+        desc: "Ataque rápido e preciso.",
+        imgM: "assets/neon_blade.png",
+        imgF: "assets/lamina_neon_f.png"
+    },
+
+    // Classe Mago
+    {
         name: "Mago Cibernético",
         hp: 100, atk: [18, 22], def: [3, 6], icon: "🔮",
         desc: "Alto dano, pouca defesa.",
         imgM: "assets/cyber_mage.png",
-        imgF: "assets/cyber_mage.png" // Fallback
+        imgF: "assets/lamina_neon_f.png"
     },
+    {
+        name: "Oráculo de Dados",
+        hp: 100, atk: [19, 23], def: [2, 5], icon: "🧿",
+        desc: "Poder arcano digital.",
+        imgM: "assets/cyber_mage.png",
+        imgF: "assets/lamina_neon_f.png"
+    },
+
+    // Classe Tanque
     {
         name: "Tanque de Dados",
         hp: 100, atk: [10, 15], def: [8, 12], icon: "🛡️",
         desc: "Resistência máxima.",
         imgM: "assets/data_tank.png",
-        imgF: "assets/data_tank.png" // Fallback
+        imgF: "assets/lamina_neon_f.png"
     },
+    {
+        name: "Colosso de Ferro",
+        hp: 100, atk: [11, 16], def: [9, 13], icon: "🧱",
+        desc: "Muralha impenetrável.",
+        imgM: "assets/data_tank.png",
+        imgF: "assets/lamina_neon_f.png"
+    },
+
+    // Classe Ladino
     {
         name: "Ladino Glitch",
         hp: 100, atk: [14, 18], def: [4, 7], icon: "👤",
         desc: "Ataques rápidos e furtivos.",
         imgM: "assets/glitch_rogue.png",
-        imgF: "assets/glitch_rogue.png" // Fallback
+        imgF: "assets/lamina_neon_f.png"
+    },
+    {
+        name: "Sombra Digital",
+        hp: 100, atk: [15, 19], def: [3, 6], icon: "🌌",
+        desc: "Mestre da invisibilidade.",
+        imgM: "assets/glitch_rogue.png",
+        imgF: "assets/lamina_neon_f.png"
+    },
+
+    // Classe Bruto
+    {
+        name: "Bruto de Neon",
+        hp: 120, atk: [12, 17], def: [6, 9], icon: "👊",
+        desc: "Muita vida e força bruta.",
+        imgM: "assets/neon_blade.png",
+        imgF: "assets/lamina_neon_f.png"
+    },
+    {
+        name: "Sentinela Urbana",
+        hp: 110, atk: [13, 18], def: [7, 10], icon: "👮",
+        desc: "Defensor pesado da cidade.",
+        imgM: "assets/data_tank.png",
+        imgF: "assets/lamina_neon_f.png"
     }
 ];
 
@@ -81,8 +132,9 @@ function initSelection() {
     characters.forEach((char, index) => {
         const card = document.createElement('div');
         card.className = 'char-card';
+        const charImg = currentGender === 'M' ? char.imgM : char.imgF;
         card.innerHTML = `
-            <div class="card-icon">${char.icon}</div>
+            <div class="card-image" style="background-image: url('${charImg}')"></div>
             <h4>${char.name}${currentGender === 'F' ? ' (F)' : ''}</h4>
             <p class="desc">${char.desc}</p>
             <div class="stats">
@@ -150,11 +202,14 @@ function selectWeapon(index) {
             // Random CPU
             const cpuCharIndex = Math.floor(Math.random() * characters.length);
             const cpuWeaponIndex = Math.floor(Math.random() * weapons.length);
-            p2 = { ...characters[cpuCharIndex], currentHp: 100 };
+            const cpuGender = Math.random() > 0.5 ? 'F' : 'M';
+
+            p2 = { ...characters[cpuCharIndex], currentHp: 100, gender: cpuGender };
+            p2.img = cpuGender === 'M' ? p2.imgM : p2.imgF;
             p2.weapon = weapons[cpuWeaponIndex];
             p2.atk = [p2.atk[0] + p2.weapon.atkMod, p2.atk[1] + p2.weapon.atkMod];
             p2.def = [p2.def[0] + p2.weapon.defMod, p2.def[1] + p2.weapon.defMod];
-            p2.name += " (CPU)";
+            p2.name += ` (${cpuGender === 'M' ? 'M' : 'F'}) (CPU)`;
             startBattle();
         }
     } else {

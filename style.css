@@ -382,3 +382,7 @@ button:active {
 .gender-btn:hover { background: rgba(255,255,255,0.2); }
 .fighter-image { transition: transform 0.1s ease; }
 
+
+.card-image { width: 100px; height: 100px; margin: 0 auto 1rem; border-radius: 50%; border: 2px solid var(--primary); background-size: cover; background-position: center; box-shadow: 0 0 10px rgba(0, 242, 255, 0.3); transition: transform 0.3s ease; }
+.char-card:hover .card-image { transform: scale(1.1); }
+
